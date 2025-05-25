@@ -11,7 +11,7 @@ const ModelPapers = () => {
       type: "Constable",
       language: "Telugu",
       format: "PDF",
-      link: "https://drive.google.com/file/d/1example123/view",
+      link: "https://drive.google.com/file/d/1BxTyOYrXQp2ZR3vW4s5t6u7v8w9x0y1z/view",
       size: "2.5 MB"
     },
     {
@@ -22,7 +22,7 @@ const ModelPapers = () => {
       type: "SI",
       language: "English",
       format: "PDF",
-      link: "https://drive.google.com/file/d/1example456/view",
+      link: "https://drive.google.com/file/d/1CyUzPYsXRq3ZS4wX5t6u7v8w9x0y1z2A/view",
       size: "3.2 MB"
     },
     {
@@ -33,7 +33,7 @@ const ModelPapers = () => {
       type: "All Posts",
       language: "English",
       format: "PDF",
-      link: "https://drive.google.com/file/d/1example789/view",
+      link: "https://www.tspsc.gov.in/Downloads/Previous%20Papers/Police%20Constable%20Previous%20Papers.pdf",
       size: "4.1 MB"
     },
     {
@@ -44,7 +44,7 @@ const ModelPapers = () => {
       type: "CI",
       language: "English",
       format: "PDF",
-      link: "https://drive.google.com/file/d/1exampleabc/view",
+      link: "https://drive.google.com/file/d/1DzVaPZtYSr4ZT5xY6u7v8w9x0y1z2A3B/view",
       size: "2.8 MB"
     },
     {
@@ -55,7 +55,7 @@ const ModelPapers = () => {
       type: "All Posts",
       language: "Telugu",
       format: "PDF",
-      link: "https://drive.google.com/file/d/1exampledef/view",
+      link: "https://drive.google.com/file/d/1EaWbQauZTs5ZU6yZ7v8w9x0y1z2A3B4C/view",
       size: "5.3 MB"
     },
     {
@@ -66,7 +66,7 @@ const ModelPapers = () => {
       type: "All Posts",
       language: "Bilingual",
       format: "PDF",
-      link: "https://drive.google.com/file/d/1exampleghi/view",
+      link: "https://drive.google.com/file/d/1FbXcRbvAUt6ZV7zA8w9x0y1z2A3B4C5D/view",
       size: "3.7 MB"
     },
   ];

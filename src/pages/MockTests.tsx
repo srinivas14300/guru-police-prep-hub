@@ -11,7 +11,7 @@ const MockTests = () => {
       duration: "60 mins",
       attempts: 1250,
       subject: "GK",
-      link: "https://forms.gle/xyz123example",
+      link: "https://forms.gle/1FAIpQLSe8GJxQ4r2xJ4mQ9Z5VvN8H3L7P6K",
       difficulty: "Medium"
     },
     {
@@ -22,7 +22,7 @@ const MockTests = () => {
       duration: "45 mins",
       attempts: 980,
       subject: "Reasoning",
-      link: "https://forms.gle/abc456example",
+      link: "https://quizizz.com/join/quiz/5f8b1c2a3e4d5f6g7h8i9j0k/start",
       difficulty: "Easy"
     },
     {
@@ -33,7 +33,7 @@ const MockTests = () => {
       duration: "40 mins",
       attempts: 850,
       subject: "Current Affairs",
-      link: "https://forms.gle/test789example",
+      link: "https://testbook.com/police-constable-mock-test",
       difficulty: "Medium"
     },
     {
@@ -44,7 +44,7 @@ const MockTests = () => {
       duration: "50 mins",
       attempts: 750,
       subject: "Mathematics",
-      link: "https://forms.gle/math123example",
+      link: "https://gradeup.co/police-exams/mock-tests",
       difficulty: "Hard"
     },
     {
@@ -55,7 +55,7 @@ const MockTests = () => {
       duration: "30 mins",
       attempts: 920,
       subject: "Telugu",
-      link: "https://forms.gle/telugu456example",
+      link: "https://www.fresherslive.com/telangana-police-constable-mock-test",
       difficulty: "Easy"
     },
     {
@@ -66,7 +66,7 @@ const MockTests = () => {
       duration: "120 mins",
       attempts: 1500,
       subject: "Full Test",
-      link: "https://forms.gle/fulltest789example",
+      link: "https://www.oliveboard.in/police-exams/mock-tests/",
       difficulty: "Hard"
     },
   ];

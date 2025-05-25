@@ -22,9 +22,9 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: "1,00,000+", label: "Students Helped" },
-    { number: "50+", label: "Mock Tests" },
-    { number: "25+", label: "Model Papers" },
+    { number: "25,000+", label: "Students Helped" },
+    { number: "15+", label: "Mock Tests" },
+    { number: "12+", label: "Model Papers" },
     { number: "24/7", label: "Support Available" }
   ];
 
@@ -73,14 +73,14 @@ const Home = () => {
           <div className="flex items-center justify-center mb-4">
             <Award className="w-8 h-8 text-ts-gold mr-2" />
             <span className="bg-ts-gold text-ts-blue px-3 py-1 rounded-full text-sm font-semibold">
-              Trusted by 1 Lakh+ Students
+              Trusted by 25,000+ Students
             </span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
             Welcome to <span className="text-ts-gold">TS Police Guru</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-blue-100">
-            Helping <span className="text-ts-gold font-bold">1 Lakh+ Students</span> Prepare for TS Police Jobs
+            Helping <span className="text-ts-gold font-bold">25,000+ Students</span> Prepare for TS Police Jobs
           </p>
           <p className="text-lg mb-8 text-blue-200">
             Complete Preparation Platform for Telangana Police Constable, SI & CI Exams

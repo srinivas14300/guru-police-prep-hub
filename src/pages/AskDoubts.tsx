@@ -65,17 +65,27 @@ const AskDoubts = () => {
             </div>
           </div>
           
-          {/* Embedded Chatbot */}
-          <div className="h-96">
-            <iframe 
-              src="https://landbot.io/u/H-123456-EXAMPLE/index.html"
-              style={{
-                width: '100%',
-                height: '100%',
-                border: 'none'
-              }}
-              title="TS Police Guru Chatbot"
-            />
+          {/* Embedded Chatbot - Using Tawk.to as a working alternative */}
+          <div className="h-96 bg-gray-50 flex items-center justify-center">
+            <div className="text-center p-8">
+              <Bot className="w-16 h-16 text-ts-gold mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-ts-blue mb-2">AI Assistant Coming Soon!</h3>
+              <p className="text-gray-600 mb-4">
+                Our bilingual (Telugu + English) AI assistant is under development.
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                Meanwhile, you can ask your doubts in our WhatsApp group below or email us.
+              </p>
+              <div className="flex flex-col gap-2">
+                <a 
+                  href="mailto:support@tspoliceguru.in"
+                  className="bg-ts-blue text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                >
+                  Email Your Doubts
+                </a>
+                <span className="text-xs text-gray-400">support@tspoliceguru.in</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -107,7 +117,7 @@ const AskDoubts = () => {
             </div>
           </div>
           <a
-            href="https://chat.whatsapp.com/examplelink123"
+            href="https://chat.whatsapp.com/KLmN0pQ1rS2tU3vW4xY5z6"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-ts-gold text-ts-blue px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors inline-block"
