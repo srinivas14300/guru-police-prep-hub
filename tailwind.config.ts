@@ -1,5 +1,5 @@
-
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme"
 
 export default {
 	darkMode: ["class"],
@@ -25,6 +25,7 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				'lightBlue': '#bae6fd', // Deeper blue for better visibility
 				primary: {
 					DEFAULT: '#1E3A8A', // Indigo 900
 					foreground: '#FFFFFF'

@@ -63,7 +63,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <div className="min-h-screen bg-light-blue py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -96,7 +96,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
+          <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-bold text-ts-blue mb-6">
               Send us a Message
             </h2>
@@ -166,7 +166,7 @@ const Contact = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-gradient-to-br from-ts-blue to-blue-800 rounded-xl p-8 text-white">
+            <div className="bg-gradient-to-br from-ts-blue to-blue-800 rounded-xl p-8 text-white shadow-lg">
               <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
               <p className="text-blue-100 mb-6">
                 We're committed to helping you succeed in your TS Police exam preparation. Our support team is ready to assist you with any questions or concerns.

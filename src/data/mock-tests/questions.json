@@ -1,0 +1,1082 @@
+[
+  {
+    "id": 1,
+    "text": "A sum becomes ₹10,000 in 3 years and ₹15,000 in 6 years at compound interest. Find the rate of interest per annum (approx)?",
+    "options": [
+      "A) 20%",
+      "B) 22.5%",
+      "C) 25%",
+      "D) 26.5%"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Using compound interest formula: 15000 = 10000(1 + r/100)³. Solving gives r ≈ 26.5%",
+    "subject": "Arithmetic",
+    "topic": "Compound Interest",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 2,
+    "text": "A train 150m long passes a pole in 9 seconds. How long will it take to pass a platform 250m long?",
+    "options": [
+      "A) 24 sec",
+      "B) 20 sec",
+      "C) 18 sec",
+      "D) 15 sec"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Speed = 150/9 m/s. Time to pass platform = (150+250)/(150/9) = 400×9/150 = 24 seconds",
+    "subject": "Arithmetic",
+    "topic": "Time & Distance",
+    "difficulty": "Medium",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 3,
+    "text": "A can complete a work in 12 days working 8 hours a day. B can complete the same work in 8 days working 10 hours a day. If both work together, working 8 hours a day, in how many days will the work be completed?",
+    "options": [
+      "A) 5 5/11",
+      "B) 6",
+      "C) 6 6/11",
+      "D) 7"
+    ],
+    "correctAnswer": 0,
+    "explanation": "A: 12×8=96 man-hours, B: 8×10=80 man-hours. Combined rate = (1/96 + 1/80) = 11/480 per hour. For 8 hours: 11/60 per day. Days needed = 60/11 = 5 5/11",
+    "subject": "Arithmetic",
+    "topic": "Time & Work",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 5,
+    "text": "A shopkeeper marks his goods 25% above cost price but allows a discount of 10%. What is his net profit percentage?",
+    "options": [
+      "A) 10%",
+      "B) 12.5%",
+      "C) 15%",
+      "D) 17.5%"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Let CP = 100. MP = 125. SP after 10% discount = 125 × 0.9 = 112.5. Profit% = (112.5-100)/100 × 100 = 12.5%",
+    "subject": "Arithmetic",
+    "topic": "Profit & Loss",
+    "difficulty": "Medium",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 6,
+    "text": "A sum of money becomes ₹1,600 in 2 years and ₹1,936 in 4 years at compound interest. Find the rate of interest per annum?",
+    "options": [
+      "A) 8%",
+      "B) 10%",
+      "C) 12%",
+      "D) 15%"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Let P be the principal. P(1+r/100)² = 1600 and P(1+r/100)⁴ = 1936. Dividing both equations: (1+r/100)² = 1936/1600 = 1.21 ⇒ 1+r/100 = 1.1 ⇒ r = 10%",
+    "subject": "Arithmetic",
+    "topic": "Compound Interest",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 7,
+    "text": "A train passes two persons walking in the same direction at 4.5 kmph and 8 kmph in 10 seconds and 11 seconds respectively. Find the length of the train.",
+    "options": [
+      "A) 100m",
+      "B) 125m",
+      "C) 150m",
+      "D) 175m"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Let train speed = x m/s. Relative speeds: (x-1.25) and (x-2.22). Equate train lengths: 10(x-1.25) = 11(x-2.22). Solving gives x=12.5 m/s. Length = 10(12.5-1.25) = 112.5m",
+    "subject": "Arithmetic",
+    "topic": "Time & Distance",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 8,
+    "text": "The average of first 50 natural numbers is:",
+    "options": [
+      "A) 25",
+      "B) 25.5",
+      "C) 26",
+      "D) 26.5"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sum of first n natural numbers = n(n+1)/2. For n=50, sum = 50*51/2 = 1275. Average = 1275/50 = 25.5",
+    "subject": "Arithmetic",
+    "topic": "Averages",
+    "difficulty": "Easy",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 9,
+    "text": "If 20% of a number is 50, what is 30% of that number?",
+    "options": [
+      "A) 60",
+      "B) 70",
+      "C) 75",
+      "D) 80"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Let the number be x. Then, 0.20x = 50 => x = 250. 30% of 250 = 75",
+    "subject": "Arithmetic",
+    "topic": "Percentages",
+    "difficulty": "Easy",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 11,
+    "text": "A shopkeeper marks his goods 20% above cost price but allows a discount of 10%. What is his net profit percentage?",
+    "options": [
+      "A) 8%",
+      "B) 10%",
+      "C) 12%",
+      "D) 15%"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Let CP = 100. MP = 120. SP = 90% of 120 = 108. Profit% = 8%",
+    "subject": "Arithmetic",
+    "topic": "Profit & Loss",
+    "difficulty": "Medium",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 12,
+    "text": "A sum of money doubles itself in 5 years at simple interest. In how many years will it become 6 times itself?",
+    "options": [
+      "A) 15 years",
+      "B) 20 years",
+      "C) 25 years",
+      "D) 30 years"
+    ],
+    "correctAnswer": 2,
+    "explanation": "If P becomes 2P in 5 years, then rate = 20% p.a. To become 6P, interest needed = 5P. Time = (5P×100)/(P×20) = 25 years",
+    "subject": "Arithmetic",
+    "topic": "Simple Interest",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 13,
+    "text": "A boat takes 4 hours to go 16 km upstream and 2 hours to return downstream. Find the speed of the boat in still water.",
+    "options": [
+      "A) 4 kmph",
+      "B) 5 kmph",
+      "C) 6 kmph",
+      "D) 8 kmph"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Let speed of boat = x, speed of stream = y. Upstream: 16/(x-y) = 4. Downstream: 16/(x+y) = 2. Solving gives x=6 kmph",
+    "subject": "Arithmetic",
+    "topic": "Boats & Streams",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 14,
+    "text": "A mixture contains milk and water in the ratio 5:3. If 10 liters of water is added, the ratio becomes 5:4. Find the quantity of milk in the mixture.",
+    "options": [
+      "A) 25 liters",
+      "B) 30 liters",
+      "C) 40 liters",
+      "D) 50 liters"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Let milk = 5x, water = 3x. Then 5x/(3x+10) = 5/4. Solving gives x=10. So milk = 50 liters",
+    "subject": "Arithmetic",
+    "topic": "Mixtures",
+    "difficulty": "Medium",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 15,
+    "text": "The difference between compound interest and simple interest on a sum for 2 years at 10% per annum is ₹100. Find the sum.",
+    "options": [
+      "A) ₹5,000",
+      "B) ₹10,000",
+      "C) ₹15,000",
+      "D) ₹20,000"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Difference = P(r/100)². So 100 = P(10/100)². P = 100×100 = ₹10,000",
+    "subject": "Arithmetic",
+    "topic": "Compound Interest",
+    "difficulty": "Hard",
+    "section": "Arithmetic",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 35,
+    "text": "In a row of 40 students, A is 15th from the left and B is 10th from the right. How many students are there between A and B?",
+    "options": [
+      "A) 13",
+      "B) 14",
+      "C) 15",
+      "D) 16"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Position of A from right = 40 - 15 + 1 = 26. B is 10th from right. So students between them = 26 - 10 - 1 = 15",
+    "subject": "Reasoning",
+    "topic": "Ranking",
+    "difficulty": "Medium",
+    "section": "Reasoning",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 37,
+    "text": "Find the missing number in the series: 2, 5, 10, 17, 26, ?",
+    "options": [
+      "A) 35",
+      "B) 36",
+      "C) 37",
+      "D) 38"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The pattern is: 1²+1=2, 2²+1=5, 3²+1=10, 4²+1=17, 5²+1=26, 6²+1=37",
+    "subject": "Reasoning",
+    "topic": "Number Series",
+    "difficulty": "Easy",
+    "section": "Reasoning",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 39,
+    "text": "In a certain code, if PAINTER is written as 9853642 and PINT as 9543, how is ENTER written in that code?",
+    "options": [
+      "A) 3642",
+      "B) 3648",
+      "C) 3649",
+      "D) 3652"
+    ],
+    "correctAnswer": 0,
+    "explanation": "From PAINTER: P=9, A=8, I=5, N=3, T=4, E=6, R=2. So ENTER = 6,3,4,6,2 = 63462",
+    "subject": "Reasoning",
+    "topic": "Coding-Decoding",
+    "difficulty": "Hard",
+    "section": "Reasoning",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 41,
+    "text": "In a row of 40 students, Ramesh is 15th from the left end and Suresh is 10th from the right end. How many students are there between Ramesh and Suresh?",
+    "options": [
+      "A) 13",
+      "B) 14",
+      "C) 15",
+      "D) 16"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Position of Suresh from left = 40 - 10 + 1 = 31. Students between them = 31 - 15 - 1 = 15",
+    "subject": "Reasoning",
+    "topic": "Ranking",
+    "difficulty": "Hard",
+    "section": "Reasoning",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 65,
+    "text": "Who was the first Governor-General of independent India?",
+    "options": [
+      "A) Lord Mountbatten",
+      "B) C. Rajagopalachari",
+      "C) Jawaharlal Nehru",
+      "D) Rajendra Prasad"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Lord Mountbatten was the last Viceroy and first Governor-General of independent India from 1947-48.",
+    "subject": "Indian History",
+    "topic": "Modern India",
+    "difficulty": "Easy",
+    "section": "Indian History",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 68,
+    "text": "The first session of the Indian National Congress was held in 1885 at:",
+    "options": [
+      "A) Bombay",
+      "B) Calcutta",
+      "C) Madras",
+      "D) Delhi"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The first session of the Indian National Congress was held in Bombay (now Mumbai) in December 1885 under the presidency of Womesh Chunder Bonnerjee.",
+    "subject": "Indian History",
+    "topic": "Freedom Struggle",
+    "difficulty": "Easy",
+    "section": "Indian History",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 67,
+    "text": "Who among the following was the founder of the Theosophical Society in India?",
+    "options": [
+      "A) Annie Besant",
+      "B) Madame Blavatsky",
+      "C) Henry Steel Olcott",
+      "D) Swami Vivekananda"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The Theosophical Society was founded by Madame Blavatsky and Henry Steel Olcott in New York in 1875, but it was Olcott who established its headquarters in India at Adyar, Chennai in 1882.",
+    "subject": "Indian History",
+    "topic": "Socio-Religious Movements",
+    "difficulty": "Hard",
+    "section": "Indian History",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 76,
+    "text": "The idea of Fundamental Duties in the Indian Constitution was taken from which country?",
+    "options": [
+      "A) USA",
+      "B) UK",
+      "C) USSR",
+      "D) Canada"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The concept of Fundamental Duties was borrowed from the Constitution of the former Soviet Union (USSR).",
+    "subject": "Indian Polity",
+    "topic": "Constitution",
+    "difficulty": "Medium",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 77,
+    "text": "Which Article of the Indian Constitution provides for the establishment of a Finance Commission?",
+    "options": [
+      "A) Article 280",
+      "B) Article 324",
+      "C) Article 356",
+      "D) Article 360"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Article 280 provides for the establishment of a Finance Commission to make recommendations regarding the distribution of financial resources between the Union and the States.",
+    "subject": "Indian Polity",
+    "topic": "Constitution",
+    "difficulty": "Hard",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 79,
+    "text": "Which part of the Indian Constitution deals with the Fundamental Rights?",
+    "options": [
+      "A) Part I",
+      "B) Part II",
+      "C) Part III",
+      "D) Part IV"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Part III of the Indian Constitution (Articles 12-35) deals with Fundamental Rights, which are essential for the development of individuals and are justiciable in nature.",
+    "subject": "Indian Polity",
+    "topic": "Constitution",
+    "difficulty": "Easy",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 80,
+    "text": "The 73rd Constitutional Amendment Act is related to:",
+    "options": [
+      "A) Municipalities",
+      "B) Panchayati Raj",
+      "C) Cooperative Societies",
+      "D) Scheduled Areas"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 73rd Constitutional Amendment Act (1992) gave constitutional status to the Panchayati Raj Institutions (PRIs) and added a new Part IX to the Constitution.",
+    "subject": "Indian Polity",
+    "topic": "Local Government",
+    "difficulty": "Medium",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 81,
+    "text": "Who among the following appoints the Chief Election Commissioner of India?",
+    "options": [
+      "A) Prime Minister",
+      "B) President",
+      "C) Parliament",
+      "D) Chief Justice of India"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The Chief Election Commissioner of India is appointed by the President of India under Article 324(2) of the Constitution.",
+    "subject": "Indian Polity",
+    "topic": "Constitutional Bodies",
+    "difficulty": "Medium",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 84,
+    "text": "Which Constitutional Amendment introduced the Anti-Defection Law in India?",
+    "options": [
+      "A) 51st Amendment",
+      "B) 52nd Amendment",
+      "C) 53rd Amendment",
+      "D) 54th Amendment"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 52nd Constitutional Amendment Act of 1985 introduced the Tenth Schedule to the Constitution, which contains provisions related to the Anti-Defection Law.",
+    "subject": "Indian Polity",
+    "topic": "Constitution",
+    "difficulty": "Hard",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 87,
+    "text": "Who is the final authority to interpret the Constitution of India?",
+    "options": [
+      "A) President",
+      "B) Parliament",
+      "C) Supreme Court",
+      "D) Prime Minister"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The Supreme Court of India is the final authority to interpret the Constitution. Its decisions are binding on all other courts and authorities in the country.",
+    "subject": "Indian Polity",
+    "topic": "Judiciary",
+    "difficulty": "Easy",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 90,
+    "text": "Which of the following is not a feature of the Indian Constitution?",
+    "options": [
+      "A) Federalism",
+      "B) Parliamentary System",
+      "C) Presidential System",
+      "D) Independent Judiciary"
+    ],
+    "correctAnswer": 2,
+    "explanation": "India follows a Parliamentary System of government, not a Presidential System. The President is the nominal head while the real executive power is vested in the Council of Ministers headed by the Prime Minister.",
+    "subject": "Indian Polity",
+    "topic": "Constitution",
+    "difficulty": "Easy",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 92,
+    "text": "Which Article of the Indian Constitution provides for the establishment of a Finance Commission?",
+    "options": [
+      "A) Article 280",
+      "B) Article 312",
+      "C) Article 324",
+      "D) Article 356"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Article 280 of the Indian Constitution provides for the establishment of a Finance Commission every five years to make recommendations regarding the distribution of financial resources between the Union and the States.",
+    "subject": "Indian Polity",
+    "topic": "Constitution",
+    "difficulty": "Hard",
+    "section": "Indian Polity",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 93,
+    "text": "Which of the following states does not share its boundary with Myanmar?",
+    "options": [
+      "A) Arunachal Pradesh",
+      "B) Nagaland",
+      "C) Manipur",
+      "D) Sikkim"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Sikkim does not share a boundary with Myanmar. The states that share boundaries with Myanmar are Arunachal Pradesh, Nagaland, Manipur, and Mizoram.",
+    "subject": "Indian Geography",
+    "topic": "Political Geography",
+    "difficulty": "Medium",
+    "section": "Indian Geography",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 94,
+    "text": "Which of the following is the largest freshwater lake in India?",
+    "options": [
+      "A) Wular Lake",
+      "B) Dal Lake",
+      "C) Chilika Lake",
+      "D) Vembanad Lake"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Wular Lake in Jammu and Kashmir is the largest freshwater lake in India, with a maximum length of 16 km and breadth of 9.6 km.",
+    "subject": "Indian Geography",
+    "topic": "Lakes",
+    "difficulty": "Medium",
+    "section": "Indian Geography",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 96,
+    "text": "Which of the following rivers does not flow into the Arabian Sea?",
+    "options": [
+      "A) Narmada",
+      "B) Tapi",
+      "C) Mahi",
+      "D) Mahanadi"
+    ],
+    "correctAnswer": 3,
+    "explanation": "The Mahanadi flows into the Bay of Bengal, while Narmada, Tapi, and Mahi are west-flowing rivers that empty into the Arabian Sea.",
+    "subject": "Indian Geography",
+    "topic": "Rivers",
+    "difficulty": "Medium",
+    "section": "Indian Geography",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 100,
+    "text": "Which of the following is the highest dam in India?",
+    "options": [
+      "A) Bhakra Nangal",
+      "B) Tehri",
+      "C) Hirakud",
+      "D) Sardar Sarovar"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The Tehri Dam in Uttarakhand is the highest dam in India with a height of 260.5 meters (855 ft). It is built on the Bhagirathi River and is part of the Tehri Hydro Power Complex.",
+    "subject": "Indian Geography",
+    "topic": "Dams",
+    "difficulty": "Hard",
+    "section": "Indian Geography",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 104,
+    "text": "Which of the following is not a tributary of the Ganges?",
+    "options": [
+      "A) Yamuna",
+      "B) Gandak",
+      "C) Kosi",
+      "D) Tapi"
+    ],
+    "correctAnswer": 3,
+    "explanation": "The Tapi (or Tapti) is a river in central India that flows westward into the Arabian Sea, while Yamuna, Gandak, and Kosi are major tributaries of the Ganges.",
+    "subject": "Indian Geography",
+    "topic": "Rivers",
+    "difficulty": "Medium",
+    "section": "Indian Geography",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 107,
+    "text": "Which of the following is the largest saltwater lake in India?",
+    "options": [
+      "A) Chilika Lake",
+      "B) Wular Lake",
+      "C) Sambhar Lake",
+      "D) Pulicat Lake"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Chilika Lake in Odisha is the largest saltwater lake in India and the second largest lagoon in the world. It is the largest wintering ground for migratory birds on the Indian subcontinent.",
+    "subject": "Indian Geography",
+    "topic": "Lakes",
+    "difficulty": "Medium",
+    "section": "Indian Geography",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 155,
+    "text": "Which of the following is the largest district in Telangana by area?",
+    "options": [
+      "A) Bhadradri Kothagudem",
+      "B) Adilabad",
+      "C) Nalgonda",
+      "D) Mahabubnagar"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Mahabubnagar is the largest district in Telangana by area, covering 4,037.00 sq km, followed by Nalgonda and Adilabad.",
+    "subject": "Telangana GK",
+    "topic": "Geography",
+    "difficulty": "Hard",
+    "section": "Telangana GK",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 111,
+    "text": "Which of the following is not a greenhouse gas?",
+    "options": [
+      "A) Carbon dioxide",
+      "B) Methane",
+      "C) Oxygen",
+      "D) Nitrous oxide"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Oxygen is not a greenhouse gas. The main greenhouse gases are water vapor, carbon dioxide, methane, nitrous oxide, and ozone.",
+    "subject": "General Science",
+    "topic": "Environmental Science",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 113,
+    "text": "Which of the following pairs is NOT correctly matched?",
+    "options": [
+      "A) Vitamin K - Blood clotting",
+      "B) Vitamin D - Rickets",
+      "C) Vitamin B1 - Beri Beri",
+      "D) Vitamin E - Night blindness"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Vitamin E is an antioxidant and is not related to night blindness. Vitamin A deficiency causes night blindness.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 114,
+    "text": "Which of the following is NOT a function of the liver?",
+    "options": [
+      "A) Bile production",
+      "B) Detoxification",
+      "C) Protein synthesis",
+      "D) Blood filtration"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Blood filtration is primarily the function of the kidneys, not the liver. The liver produces bile, detoxifies chemicals, and synthesizes proteins.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 115,
+    "text": "The phenomenon of light bending when it passes from one medium to another is called:",
+    "options": [
+      "A) Reflection",
+      "B) Refraction",
+      "C) Diffraction",
+      "D) Scattering"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Refraction is the bending of light as it passes from one medium to another with a different optical density, causing it to change speed and direction.",
+    "subject": "General Science",
+    "topic": "Physics",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 117,
+    "text": "The process by which plants lose water vapor through their leaves is called:",
+    "options": [
+      "A) Photosynthesis",
+      "B) Transpiration",
+      "C) Respiration",
+      "D) Transduction"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Transpiration is the process by which plants lose water vapor through small openings called stomata on the surface of their leaves.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 119,
+    "text": "The SI unit of electric current is:",
+    "options": [
+      "A) Volt",
+      "B) Ampere",
+      "C) Ohm",
+      "D) Watt"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The SI unit of electric current is the ampere (A), named after the French physicist André-Marie Ampère.",
+    "subject": "General Science",
+    "topic": "Physics",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 120,
+    "text": "Which of the following is NOT a type of electromagnetic wave?",
+    "options": [
+      "A) X-rays",
+      "B) Radio waves",
+      "C) Sound waves",
+      "D) Microwaves"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Sound waves are mechanical waves that require a medium to travel through, while electromagnetic waves (like X-rays, radio waves, and microwaves) can travel through a vacuum.",
+    "subject": "General Science",
+    "topic": "Physics",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 121,
+    "text": "The pH of pure water at 25°C is:",
+    "options": [
+      "A) 5",
+      "B) 7",
+      "C) 8",
+      "D) 14"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Pure water at 25°C has a neutral pH of 7. The pH scale ranges from 0 (acidic) to 14 (alkaline), with 7 being neutral.",
+    "subject": "General Science",
+    "topic": "Chemistry",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 122,
+    "text": "Which of the following is the largest organ in the human body?",
+    "options": [
+      "A) Liver",
+      "B) Brain",
+      "C) Skin",
+      "D) Lungs"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The skin is the largest organ in the human body, with an average surface area of about 20 square feet in adults.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 123,
+    "text": "Which of the following is the chemical formula of common salt?",
+    "options": [
+      "A) NaCl",
+      "B) H2O",
+      "C) CO2",
+      "D) C6H12O6"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Common salt is sodium chloride with the chemical formula NaCl.",
+    "subject": "General Science",
+    "topic": "Chemistry",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 124,
+    "text": "Which of the following is NOT a function of the human liver?",
+    "options": [
+      "A) Bile production",
+      "B) Detoxification",
+      "C) Blood cell production",
+      "D) Protein synthesis"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Blood cell production is primarily the function of bone marrow, not the liver. The liver produces bile, detoxifies chemicals, and synthesizes proteins.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 125,
+    "text": "Which of the following is NOT a noble gas?",
+    "options": [
+      "A) Helium",
+      "B) Neon",
+      "C) Chlorine",
+      "D) Argon"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Chlorine is a halogen, not a noble gas. The noble gases are found in Group 18 of the periodic table and include helium, neon, argon, krypton, xenon, and radon.",
+    "subject": "General Science",
+    "topic": "Chemistry",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 126,
+    "text": "The process by which plants make their own food using sunlight is called:",
+    "options": [
+      "A) Respiration",
+      "B) Transpiration",
+      "C) Photosynthesis",
+      "D) Fermentation"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize foods with the help of chlorophyll, converting carbon dioxide and water into glucose and oxygen.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 127,
+    "text": "Which of the following is a non-metal that is liquid at room temperature?",
+    "options": [
+      "A) Bromine",
+      "B) Iodine",
+      "C) Phosphorus",
+      "D) Sulfur"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Bromine (Br) is the only non-metal that is liquid at room temperature. Iodine, phosphorus, and sulfur are all solids at room temperature.",
+    "subject": "General Science",
+    "topic": "Chemistry",
+    "difficulty": "Hard",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 128,
+    "text": "The force that opposes the relative motion between two surfaces in contact is called:",
+    "options": [
+      "A) Tension",
+      "B) Friction",
+      "C) Gravity",
+      "D) Elasticity"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Friction is the force that opposes the relative motion between two surfaces in contact. It acts parallel to the surfaces and opposite to the direction of motion or intended motion.",
+    "subject": "General Science",
+    "topic": "Physics",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 129,
+    "text": "Which of the following is NOT a part of the human digestive system?",
+    "options": [
+      "A) Esophagus",
+      "B) Trachea",
+      "C) Stomach",
+      "D) Small intestine"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The trachea is part of the respiratory system, not the digestive system. It is commonly known as the windpipe and connects the larynx to the bronchi of the lungs.",
+    "subject": "General Science",
+    "topic": "Biology",
+    "difficulty": "Easy",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 131,
+    "text": "The process by which a solid changes directly into a gas without becoming a liquid first is called:",
+    "options": [
+      "A) Evaporation",
+      "B) Condensation",
+      "C) Sublimation",
+      "D) Deposition"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Sublimation is the process where a solid changes directly into a gas without passing through the liquid phase. Dry ice (solid CO₂) is a common example.",
+    "subject": "General Science",
+    "topic": "Chemistry",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 132,
+    "text": "Which of the following is NOT a renewable source of energy?",
+    "options": [
+      "A) Solar energy",
+      "B) Wind energy",
+      "C) Natural gas",
+      "D) Hydropower"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Natural gas is a fossil fuel and a non-renewable source of energy, while solar, wind, and hydropower are renewable sources that can be naturally replenished.",
+    "subject": "General Science",
+    "topic": "Environmental Science",
+    "difficulty": "Medium",
+    "section": "General Science",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 131,
+    "text": "Which city hosted the G20 Summit in 2023?",
+    "options": [
+      "A) New Delhi",
+      "B) Bali",
+      "C) Rome",
+      "D) Osaka"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The G20 Summit 2023 was held in New Delhi, India on September 9-10, 2023.",
+    "subject": "Current Affairs",
+    "topic": "International",
+    "difficulty": "Easy",
+    "section": "Current Affairs",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 134,
+    "text": "Which country recently became the 21st member of the International Solar Alliance (ISA)?",
+    "options": [
+      "A) USA",
+      "B) China",
+      "C) Russia",
+      "D) Japan"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The United States became the 21st member of the International Solar Alliance in 2023, joining the India-led initiative to promote solar energy.",
+    "subject": "Current Affairs",
+    "topic": "International",
+    "difficulty": "Medium",
+    "section": "Current Affairs",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 138,
+    "text": "Which country hosted the 2022 FIFA World Cup?",
+    "options": [
+      "A) Brazil",
+      "B) Qatar",
+      "C) Russia",
+      "D) France"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 2022 FIFA World Cup was held in Qatar from November 20 to December 18, 2022, making it the first World Cup to be held in the Arab world.",
+    "subject": "Current Affairs",
+    "topic": "Sports",
+    "difficulty": "Easy",
+    "section": "Current Affairs",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 151,
+    "text": "In which year was the state of Telangana officially formed?",
+    "options": [
+      "A) 2012",
+      "B) 2013",
+      "C) 2014",
+      "D) 2015"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Telangana was officially formed as the 29th state of India on June 2, 2014.",
+    "subject": "Telangana GK",
+    "topic": "State Formation",
+    "difficulty": "Easy",
+    "section": "Telangana GK",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 153,
+    "text": "Which of the following is NOT one of the major rivers flowing through Telangana?",
+    "options": [
+      "A) Godavari",
+      "B) Krishna",
+      "C) Musi",
+      "D) Cauvery"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Cauvery river does not flow through Telangana. The major rivers are Godavari, Krishna, Manjira, Musi, and Pranahita.",
+    "subject": "Telangana GK",
+    "topic": "Geography",
+    "difficulty": "Medium",
+    "section": "Telangana GK",
+    "marks": 1,
+    "timeLimit": 54
+  },
+  {
+    "id": 155,
+    "text": "Which of the following is the largest district in Telangana by area?",
+    "options": [
+      "A) Bhadradri Kothagudem",
+      "B) Adilabad",
+      "C) Nalgonda",
+      "D) Mahabubnagar"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Mahabubnagar is the largest district in Telangana by area, covering 4,037.00 sq km, followed by Nalgonda and Adilabad.",
+    "subject": "Telangana GK",
+    "topic": "Geography",
+    "difficulty": "Hard",
+    "section": "Telangana GK",
+    "marks": 1,
+    "timeLimit": 54
+  }
+]

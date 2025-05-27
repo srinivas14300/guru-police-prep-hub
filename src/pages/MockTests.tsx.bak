@@ -1,0 +1,925 @@
+import { useState, useMemo, useCallback, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Clock, FileText, Users, Search, 
+  Filter, CheckCircle, AlertCircle, 
+  Star, Globe, Brain, Calculator, Newspaper,
+  Award, BookOpen, BarChart2, 
+  TrendingUp, Calendar, Award as Trophy, 
+  ChevronDown, X, AlertTriangle, 
+  Clock as ClockIcon, Check, Calendar as CalendarIcon,
+  Loader2, ExternalLink
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useQuery } from '@tanstack/react-query';
+
+// Types for filter options
+type Difficulty = 'Easy' | 'Medium' | 'Hard';
+type Subject = 'GK' | 'Reasoning' | 'Mathematics' | 'Current Affairs' | 'Telugu' | 'Full Test' | 'General Science' | 'Aptitude' | 'General Studies';
+type Language = 'en' | 'te';
+
+interface TestCategory {
+  id: string;
+  name: string;
+  description: string;
+  icon: ReactNode;
+  count: number;
+  color: string;
+}
+
+// Base interface for common test properties
+interface BaseTest {
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  attempts: number;
+  subject: Subject;
+  link: string;
+  difficulty: Difficulty;
+  language: Language;
+  isPremium: boolean;
+  lastUpdated: string;
+  topics: string[];
+  isNew: boolean;
+  rating: number;
+  category: string;
+  author: string;
+  completionRate: number;
+  totalMarks: number;
+  passingMarks: number;
+  sections: string[];
+}
+
+// Interface for test listing (shows only question count)
+interface MockTest extends Omit<BaseTest, 'questions'> {
+  questions: number; // Just the count of questions
+}
+
+// Interface for test taking (includes full question details)
+interface MockTestWithQuestions extends Omit<BaseTest, 'questions'> {
+  questions: Question[]; // Full question objects
+}
+
+interface Question {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  marks: number;
+  section: string;
+}
+
+interface Filters {
+  subject: string[];
+  difficulty: string[];
+  language: string[];
+  isFree: boolean;
+}
+
+// Mock tests data with full details (for TestInterface)
+const mockTestsWithQuestions: MockTestWithQuestions[] = [
+  {
+    id: 1,
+    title: "TS Constable PWT - Free Sample Mock Test 1",
+    description: "Comprehensive test covering all subjects for TS Police Constable PWT recruitment",
+    duration: "180",
+    attempts: 3,
+    subject: "Full Test",
+    link: "/test/constable-pwt-1",
+    difficulty: "Medium",
+    language: "en",
+    isPremium: false,
+    lastUpdated: "2024-05-20",
+    topics: ["General Studies", "Mathematics", "Telugu", "English", "Current Affairs"],
+    isNew: true,
+    rating: 4.7,
+    category: "full-test",
+    author: "TS Police Academy",
+    completionRate: 82,
+    totalMarks: 100,
+    passingMarks: 40,
+    sections: ["General Studies", "Mathematics", "Telugu", "English", "Current Affairs"],
+    questions: [
+      {
+        id: 1,
+        question: "Which of the following is not a fundamental right in the Indian Constitution?",
+        options: [
+          "Right to Equality",
+          "Right to Property",
+          "Right to Freedom of Religion",
+          "Right to Constitutional Remedies"
+        ],
+        correctAnswer: 1,
+        explanation: "Right to Property was removed from the list of Fundamental Rights by the 44th Amendment Act of 1978 and made a legal right under Article 300A.",
+        marks: 1,
+        section: "General Studies"
+      },
+      {
+        id: 2,
+        question: "What is the capital of Telangana?",
+        options: [
+          "Vijayawada",
+          "Hyderabad",
+          "Warangal",
+          "Karimnagar"
+        ],
+        correctAnswer: 1,
+        explanation: "Hyderabad is the capital of Telangana and also the de jure capital of Andhra Pradesh until 2024.",
+        marks: 1,
+        section: "General Knowledge"
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "TS Police Constable - General Science Test",
+    description: "Practice test covering Physics, Chemistry, and Biology for TS Police Constable exam",
+    duration: "60",
+    attempts: 2,
+    subject: "General Science",
+    link: "/test/constable-science-1",
+    difficulty: "Easy",
+    language: "en",
+    isPremium: true,
+    lastUpdated: "2024-05-10",
+    topics: ["Physics", "Chemistry", "Biology"],
+    isNew: false,
+    rating: 4.2,
+    category: "science",
+    author: "TS Police Academy",
+    completionRate: 72,
+    totalMarks: 100,
+    passingMarks: 50,
+    sections: ["Physics", "Chemistry", "Biology"],
+    questions: [
+      {
+        id: 1,
+        question: "Which of the following is the SI unit of force?",
+        options: ["Joule", "Newton", "Watt", "Pascal"],
+        correctAnswer: 1,
+        explanation: "The SI unit of force is the Newton (N), named after Sir Isaac Newton.",
+        marks: 1,
+        section: "Physics"
+      },
+      {
+        id: 2,
+        question: "Which of the following is NOT a greenhouse gas?",
+        options: ["Carbon Dioxide", "Methane", "Oxygen", "Nitrous Oxide"],
+        correctAnswer: 2,
+        explanation: "Oxygen (O₂) is not a greenhouse gas. The primary greenhouse gases are water vapor, carbon dioxide, methane, nitrous oxide, and ozone.",
+        marks: 2,
+        section: "Biology"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "TS Police Constable - General Studies Test",
+    description: "Practice test for Constable position in Telangana Police",
+    duration: "120",
+    attempts: 2,
+    subject: "General Studies",
+    link: "/test/constable-gs-1",
+    difficulty: "Medium",
+    language: "en",
+    isPremium: false,
+    lastUpdated: "2024-05-15",
+    topics: ["Indian History", "Indian Polity", "Geography", "Economics", "Current Affairs"],
+    isNew: true,
+    rating: 4.5,
+    category: "general-studies",
+    author: "TS Police Academy",
+    completionRate: 78,
+    totalMarks: 100,
+    passingMarks: 40,
+    sections: ["History", "Polity", "Geography", "Economics", "Current Affairs"],
+    questions: [
+      {
+        id: 1,
+        question: "Who was the first Chief Minister of Telangana?",
+        options: [
+          "K. Chandrashekar Rao",
+          "N. Chandrababu Naidu",
+          "Y. S. Rajasekhara Reddy",
+          "N. T. Rama Rao"
+        ],
+        correctAnswer: 0,
+        explanation: "K. Chandrashekar Rao (KCR) was the first Chief Minister of Telangana after the state's formation in 2014.",
+        marks: 1,
+        section: "Polity"
+      },
+      {
+        id: 2,
+        question: "Which river is known as the 'Dakshina Ganga'?",
+        options: [
+          "Godavari",
+          "Krishna",
+          "Kaveri",
+          "Mahanadi"
+        ],
+        correctAnswer: 0,
+        explanation: "The Godavari river is often referred to as 'Dakshina Ganga' or 'Ganges of the South' due to its length and significance in South India.",
+        marks: 1,
+        section: "Geography"
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "TS Police Constable - General Science Test",
+    description: "Practice test covering Physics, Chemistry, and Biology for TS Police Constable exam",
+    duration: "60",
+    attempts: 2,
+    subject: "General Science",
+    link: "/test/constable-science-1",
+    difficulty: "Easy",
+    language: "en",
+    isPremium: true,
+    isNew: false,
+    rating: 4.2,
+    category: "science",
+    author: "TS Police Academy",
+    completionRate: 72,
+    totalMarks: 100,
+    passingMarks: 50,
+    lastUpdated: "2024-05-10",
+    topics: ["Physics", "Chemistry", "Biology"],
+    sections: ["Physics", "Chemistry", "Biology"],
+    questions: [
+      {
+        id: 1,
+        question: "Which of the following is the SI unit of force?",
+        options: ["Joule", "Newton", "Watt", "Pascal"],
+        correctAnswer: 1,
+        explanation: "The SI unit of force is the Newton (N), named after Sir Isaac Newton.",
+        marks: 1,
+        section: "Physics"
+      },
+      {
+        id: 2,
+        question: "Which of the following is NOT a greenhouse gas?",
+        options: ["Carbon Dioxide", "Methane", "Oxygen", "Nitrous Oxide"],
+        correctAnswer: 2,
+        explanation: "Oxygen (O₂) is not a greenhouse gas. The primary greenhouse gases are water vapor, carbon dioxide, methane, nitrous oxide, and ozone.",
+        marks: 2,
+        section: "Environmental Science"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "TS Police SI - Free Sample Mock Test 1",
+    description: "Practice test for Sub-Inspector position in Telangana Police",
+    duration: "180",
+    attempts: 2,
+    subject: "Full Test",
+    link: "/test/si-1",
+    difficulty: "Hard",
+    language: "en",
+    isPremium: true,
+    lastUpdated: "2024-05-15",
+    topics: ["General Studies", "Arithmetic Ability", "Logical Reasoning", "English"],
+    isNew: false,
+    rating: 4.5,
+    category: "full-test",
+    author: "TS Police Academy",
+    completionRate: 75,
+    totalMarks: 200,
+    passingMarks: 70,
+    sections: ["General Studies", "Arithmetic Ability", "Logical Reasoning", "English"],
+    questions: [
+      {
+        id: 1,
+        question: "Which article of the Indian Constitution defines Fundamental Rights?",
+        options: [
+          "Article 12-35",
+          "Article 36-51",
+          "Article 52-78",
+          "Article 79-95"
+        ],
+        correctAnswer: 0,
+        explanation: "Fundamental Rights are defined in Articles 12-35 of the Indian Constitution.",
+        marks: 1,
+        section: "General Studies"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "TS Police Constable - Free Sample Mock Test 1",
+    description: "Practice test for Constable position in Telangana Police",
+    duration: "120",
+    attempts: 2,
+    subject: "Full Test",
+    link: "/test/constable-1",
+    difficulty: "Easy",
+    language: "te",
+    isPremium: false,
+    lastUpdated: "2024-05-10",
+    topics: ["General Knowledge", "Mathematics", "Telugu", "English"],
+    isNew: false,
+    rating: 4.3,
+    category: "full-test",
+    author: "TS Police Academy",
+    completionRate: 88,
+    totalMarks: 100,
+    passingMarks: 35,
+    sections: ["General Knowledge", "Mathematics", "Telugu", "English"],
+    questions: [
+      {
+        id: 1,
+        question: "తెలంగాణ రాష్ట్ర ఏ సంవత్సరంలో ఏర్పాటయ్యింది?",
+        options: [
+          "2013",
+          "2014",
+          "2015",
+          "2016"
+        ],
+        correctAnswer: 1,
+        explanation: "తెలంగాణ రాష్ట్ర 2 జూన్ 2014న ఏర్పాటయ్యింది.",
+        marks: 1,
+        section: "General Knowledge"
+      }
+    ]
+  }
+];
+
+interface Filters {
+  subject: string[];
+  difficulty: string[];
+  language: string[];
+  isFree: boolean;
+}
+
+// i18n
+type I18nKey = keyof typeof i18n['en'];
+
+const i18n = {
+  en: {
+    title: "Mock Tests",
+    subtitle: "Practice with our curated collection of mock tests designed specifically for Telangana Police exams.",
+    searchPlaceholder: "Search tests by title, description, or topics...",
+    filters: "Filters",
+    clearAll: "Clear all",
+    subjects: "Subjects",
+    difficulty: "Difficulty",
+    language: "Language",
+    freeOnly: "Free only",
+    testCategories: "Test Categories",
+    viewAll: "View all",
+    availableTests: "Available Tests",
+    questions: "questions",
+    minutes: "minutes",
+    attempt: "attempt",
+    attempts: "attempts",
+    startTest: "Start Test",
+    premium: "Premium",
+    new: "New",
+    noTestsFound: "No tests found",
+    adjustFilters: "Try adjusting your search or filter criteria",
+    clearFilters: "Clear all filters"
+  }
+};
+
+// Sample data
+const testCategories: TestCategory[] = [
+  {
+    id: 'gk',
+    name: 'General Knowledge',
+    description: 'Current affairs and general awareness',
+    icon: <Globe className="w-6 h-6" />,
+    count: 24,
+    color: 'bg-blue-100 text-blue-800'
+  },
+  {
+    id: 'reasoning',
+    name: 'Reasoning',
+    description: 'Logical and analytical reasoning',
+    icon: <Brain className="w-6 h-6" />,
+    count: 18,
+    color: 'bg-purple-100 text-purple-800'
+  },
+  {
+    id: 'math',
+    name: 'Mathematics',
+    description: 'Quantitative aptitude and arithmetic',
+    icon: <Calculator className="w-6 h-6" />,
+    count: 32,
+    color: 'bg-green-100 text-green-800'
+  },
+  {
+    id: 'current-affairs',
+    name: 'Current Affairs',
+    description: 'Latest national and international events',
+    icon: <Newspaper className="w-6 h-6" />,
+    count: 15,
+    color: 'bg-red-100 text-red-800'
+  }
+];
+
+// Helper function to get subject color
+const getSubjectColor = (subject: Subject | string) => {
+  const colors: Record<string, string> = {
+    'GK': 'bg-blue-100 text-blue-800',
+    'Reasoning': 'bg-purple-100 text-purple-800',
+    'Mathematics': 'bg-green-100 text-green-800',
+    'Current Affairs': 'bg-red-100 text-red-800',
+    'Telugu': 'bg-yellow-100 text-yellow-800',
+    'Full Test': 'bg-indigo-100 text-indigo-800',
+    'General Science': 'bg-pink-100 text-pink-800',
+    'Aptitude': 'bg-teal-100 text-teal-800',
+  };
+  return colors[subject] || 'bg-gray-100 text-gray-800';
+};
+
+// Simplified version for the test listing (without full question details)
+const sampleMockTests: MockTest[] = mockTestsWithQuestions.map(test => ({
+  ...test,
+  questions: test.questions.length
+}));
+
+// Function to get test by link (for TestInterface)
+const getTestByLink = (link: string) => {
+  return mockTestsWithQuestions.find(test => test.link === link);
+};
+
+// Function to get test by ID (for TestInterface)
+const getTestById = (id: number) => {
+  return mockTestsWithQuestions.find(test => test.id === id);
+};
+
+// Export necessary items
+export { mockTestsWithQuestions, sampleMockTests, getTestByLink, getTestById };
+
+const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty.toLowerCase()) {
+    case 'easy':
+      return 'bg-green-100 text-green-800';
+    case 'medium':
+      return 'bg-yellow-100 text-yellow-800';
+    case 'hard':
+      return 'bg-red-100 text-red-800';
+    default:
+      return 'bg-gray-100 text-gray-800';
+  }
+};
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1
+  }
+};
+
+const MockTests = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState<Filters>({
+    subject: [],
+    difficulty: [],
+    language: [],
+    isFree: false
+  });
+
+  // i18n helper function
+  const t = (key: I18nKey) => i18n.en[key];
+
+  // Clear all filters
+  const clearAllFilters = useCallback(() => {
+    setFilters({
+      subject: [],
+      difficulty: [],
+      language: [],
+      isFree: false
+    });
+  }, []);
+
+  // Toggle free only filter
+  const toggleFreeOnly = useCallback(() => {
+    setFilters(prev => ({
+      ...prev,
+      isFree: !prev.isFree
+    }));
+  }, []);
+
+  // Toggle filter selection with proper type safety
+  const toggleFilter = useCallback(
+    (type: 'subject' | 'difficulty' | 'language', value: Subject | Difficulty | Language) => {
+      setFilters(prev => {
+        const currentValues = [...prev[type]] as (Subject | Difficulty | Language)[];
+        const valueIndex = currentValues.findIndex(v => v === value);
+        
+        if (valueIndex >= 0) {
+          currentValues.splice(valueIndex, 1);
+        } else {
+          currentValues.push(value);
+        }
+
+        return {
+          ...prev,
+          [type]: currentValues
+        } as Filters;
+      });
+    },
+    []
+  );
+
+  // Fetch mock tests data
+  const { data: mockTests = [], isLoading } = useQuery<MockTest[]>({
+    queryKey: ['mockTests'],
+    queryFn: async () => {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      return sampleMockTests.map(test => ({ ...test })); // Return a new array with spread to avoid reference issues
+    },
+  });
+  
+
+
+
+
+  // Available filter options
+  const subjects: Subject[] = ['GK', 'Reasoning', 'Current Affairs', 'Mathematics', 'Telugu', 'Full Test', 'General Science', 'Aptitude'];
+  const difficulties: Difficulty[] = ['Easy', 'Medium', 'Hard'];
+  const languages: Language[] = ['en', 'te'];
+
+  // Filter tests based on search query and filters
+  const filteredTests = useMemo(() => {
+    return mockTests.filter(test => {
+      // Filter by search query
+      const searchLower = searchQuery.toLowerCase();
+      const matchesSearch = searchQuery === '' || 
+        test.title.toLowerCase().includes(searchLower) ||
+        test.description.toLowerCase().includes(searchLower) ||
+        test.topics.some(topic => topic.toLowerCase().includes(searchLower));
+      
+      // Filter by subject
+      const matchesSubject = filters.subject.length === 0 || 
+        (typeof test.subject === 'string' && filters.subject.includes(test.subject as Subject));
+      
+      // Filter by difficulty
+      const matchesDifficulty = filters.difficulty.length === 0 || 
+        filters.difficulty.includes(test.difficulty);
+      
+      // Filter by language
+      const matchesLanguage = filters.language.length === 0 || 
+        filters.language.includes(test.language);
+      
+      // Filter by premium status
+      const matchesPremium = !filters.isFree || !test.isPremium;
+      
+      return matchesSearch && matchesSubject && matchesDifficulty && matchesLanguage && matchesPremium;
+    });
+  }, [mockTests, searchQuery, filters]);
+
+  // Count active filters
+  const activeFilterCount = [
+    ...filters.subject,
+    ...filters.difficulty,
+    ...filters.language,
+    filters.isFree ? 1 : 0
+  ].length;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{t('title')}</h1>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            {t('subtitle')}
+          </p>
+        </motion.div>
+
+        {/* Search and Filters */}
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row gap-4 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder={t('searchPlaceholder')}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+              />
+            </div>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+            >
+              <Filter className="h-5 w-5" />
+              <span>{t('filters')}</span>
+              {activeFilterCount > 0 && (
+                <span className="bg-blue-500 text-white text-xs font-medium rounded-full h-5 w-5 flex items-center justify-center">
+                  {activeFilterCount}
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* Filter Panel */}
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-white rounded-lg shadow-md p-6 mt-2 border border-gray-200">
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-lg font-medium text-gray-900">{t('filters')}</h3>
+                    <div className="flex items-center space-x-4">
+                      <button
+                        onClick={clearAllFilters}
+                        disabled={activeFilterCount === 0}
+                        className="text-sm text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {t('clearAll')}
+                      </button>
+                      <button
+                        onClick={() => setShowFilters(false)}
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Subjects Filter */}
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">{t('subjects')}</h4>
+                      <div className="space-y-2">
+                        {subjects.map((subject) => (
+                          <label key={subject} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              checked={filters.subject.includes(subject)}
+                              onChange={() => toggleFilter('subject', subject)}
+                              className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700">{subject}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Difficulty Filter */}
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">{t('difficulty')}</h4>
+                      <div className="space-y-2">
+                        {difficulties.map((difficulty) => (
+                          <label key={difficulty} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              checked={filters.difficulty.includes(difficulty)}
+                              onChange={() => toggleFilter('difficulty', difficulty)}
+                              className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700">{difficulty}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Language Filter */}
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-sm font-medium text-gray-700">{t('language')}</h4>
+                      </div>
+                      <div className="space-y-2">
+                        {languages.map((lang) => (
+                          <label key={lang} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              checked={filters.language.includes(lang)}
+                              onChange={() => toggleFilter('language', lang)}
+                              className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                            />
+                            <span className="ml-2 text-sm text-gray-700">
+                              {lang === 'en' ? 'English' : 'తెలుగు'}
+                            </span>
+                          </label>
+                        ))}
+                        <label className="flex items-center mt-4">
+                          <input
+                            type="checkbox"
+                            checked={filters.isFree}
+                            onChange={toggleFreeOnly}
+                            className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                          />
+                          <span className="ml-2 text-sm font-medium text-gray-700">
+                            {t('freeOnly')}
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Test Categories */}
+        <div className="mb-12">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">{t('testCategories')}</h2>
+            <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              {t('viewAll')}
+            </button>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {testCategories.map((category) => (
+              <motion.div
+                key={category.id}
+                variants={itemVariants}
+                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 cursor-pointer"
+              >
+                <div className={`${category.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+                  {category.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">{category.name}</h3>
+                <p className="text-sm text-gray-500 mb-3">{category.description}</p>
+                <div className="flex items-center text-sm text-gray-500">
+                  <FileText className="w-4 h-4 mr-1" />
+                  <span>{category.count} {category.count === 1 ? 'Test' : 'Tests'}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Available Tests */}
+        <div>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">{t('availableTests')}</h2>
+            <div className="text-sm text-gray-500">
+              Showing {filteredTests.length} {filteredTests.length === 1 ? 'test' : 'tests'}
+            </div>
+          </div>
+
+          {filteredTests.length === 0 ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+              <AlertCircle className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noTestsFound')}</h3>
+              <p className="text-gray-500 mb-6">{t('adjustFilters')}</p>
+              <button
+                onClick={clearAllFilters}
+                disabled={activeFilterCount === 0}
+                className="text-sm text-blue-600 hover:text-blue-800 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {t('clearFilters')}
+              </button>
+            </div>
+          ) : (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filteredTests.map((test) => (
+                <motion.div
+                  key={test.id}
+                  variants={itemVariants}
+                  className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200"
+                >
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSubjectColor(test.subject as string)}`}>
+                          {test.subject}
+                        </span>
+                        {test.isNew && (
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            {t('new')}
+                          </span>
+                        )}
+                        {test.isPremium && (
+                          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            {t('premium')}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="ml-1 text-sm font-medium text-gray-900">
+                          {test.rating?.toFixed(1) || 'N/A'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{test.title}</h3>
+                    <p className="text-sm text-gray-500 mb-4 line-clamp-2">{test.description}</p>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div className="flex items-center">
+                        <FileText className="w-4 h-4 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-600">
+                          {test.questions} {t('questions')}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <ClockIcon className="w-4 h-4 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-600">
+                          {test.duration} {t('minutes')}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <Users className="w-4 h-4 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-600">
+                          {test.attempts} {test.attempts === 1 ? t('attempt') : t('attempts')}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
+                        <span className="text-sm text-gray-600">
+                          {new Date(test.lastUpdated).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {test.topics.slice(0, 3).map((topic, index) => (
+                        <span 
+                          key={index}
+                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                        >
+                          {topic}
+                        </span>
+                      ))}
+                      {test.topics.length > 3 && (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                          +{test.topics.length - 3} more
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="pt-4 border-t border-gray-100">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <span className="text-sm font-medium text-gray-900">{test.author}</span>
+                          {test.completionRate && (
+                            <div className="flex items-center mt-1">
+                              <div className="w-24 bg-gray-200 rounded-full h-1.5 mr-2">
+                                <div 
+                                  className="bg-green-500 h-1.5 rounded-full" 
+                                  style={{ width: `${test.completionRate}%` }}
+                                />
+                              </div>
+                              <span className="text-xs text-gray-500">{test.completionRate}%</span>
+                            </div>
+                          )}
+                        </div>
+                        <Link
+                          to={test.link}
+                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                          {t('startTest')}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MockTests;

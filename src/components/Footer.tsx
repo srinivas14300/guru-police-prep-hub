@@ -29,15 +29,41 @@ const Footer = () => {
     { name: "Results & Updates", path: "#" },
   ];
 
+  // Static social media links - Update these with your actual links when ready
   const socialLinks = [
-    { icon: <Facebook className="w-5 h-5" />, url: "https://facebook.com/tspoliceguru", name: "Facebook" },
-    { icon: <Twitter className="w-5 h-5" />, url: "https://twitter.com/tspoliceguru", name: "Twitter" },
-    { icon: <Instagram className="w-5 h-5" />, url: "https://instagram.com/tspoliceguru", name: "Instagram" },
-    { icon: <Youtube className="w-5 h-5" />, url: "https://youtube.com/@tspoliceguru", name: "YouTube" },
+    { icon: <Facebook className="w-5 h-5" />, url: "#", name: "Facebook" },
+    { icon: <Twitter className="w-5 h-5" />, url: "#", name: "Twitter" },
+    { icon: <Instagram className="w-5 h-5" />, url: "#", name: "Instagram" },
+    { icon: <Youtube className="w-5 h-5" />, url: "#", name: "YouTube" },
+  ];
+  
+  // Static contact information - Update these with your actual contact details when ready
+  const contactInfo = [
+    { 
+      icon: <Mail className="w-5 h-5" />, 
+      text: "contact@tspoliceguru.com",
+      url: "mailto:contact@tspoliceguru.com" 
+    },
+    { 
+      icon: <Phone className="w-5 h-5" />, 
+      text: "+91 XXXXXXXXXX",
+      url: "tel:+91XXXXXXXXXX" 
+    },
+    { 
+      icon: <MapPin className="w-5 h-5" />, 
+      text: "Hyderabad, Telangana, India",
+      url: "#" 
+    },
   ];
 
   return (
     <footer className="bg-gradient-to-br from-ts-blue to-blue-900 text-white">
+      {/* Notification Banner */}
+      <div className="bg-yellow-500 text-black text-center py-2 px-4">
+        <p className="text-sm font-medium">
+          Note: Social media and contact links are currently static. Please notify the developer when you have the actual links to update them.
+        </p>
+      </div>
       {/* Main Footer Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -144,11 +170,32 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Media Links */}
+        {/* Contact & Social Links */}
         <div className="mt-8 pt-6 border-t border-blue-700">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <h4 className="text-sm font-semibold text-ts-gold mb-2">Follow Us</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Contact Information */}
+            <div>
+              <h4 className="text-lg font-semibold text-ts-gold mb-4">Contact Us</h4>
+              <ul className="space-y-3">
+                {contactInfo.map((contact, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-ts-gold mr-3 mt-0.5">
+                      {contact.icon}
+                    </span>
+                    <a 
+                      href={contact.url} 
+                      className="text-blue-200 hover:text-ts-gold transition-colors text-sm"
+                    >
+                      {contact.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Social Media Links */}
+            <div>
+              <h4 className="text-lg font-semibold text-ts-gold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <a
@@ -156,26 +203,34 @@ const Footer = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-200 hover:text-ts-gold transition-colors"
+                    className="text-blue-200 hover:text-ts-gold transition-colors bg-blue-800 p-2 rounded-full hover:bg-blue-700"
                     aria-label={social.name}
+                    title={social.name}
                   >
                     {social.icon}
                   </a>
                 ))}
               </div>
             </div>
-            
-            <div className="text-center md:text-right">
-              <div className="flex flex-col md:flex-row items-center text-blue-200 text-xs space-y-1 md:space-y-0 md:space-x-4">
-                <span>Trusted by 25,000+ Students</span>
-                <span className="hidden md:inline">•</span>
-                <span>100% Free Platform</span>
-                <span className="hidden md:inline">•</span>
-                <span>Available 24/7</span>
+          </div>
+          
+          <div className="mt-8 pt-6 border-t border-blue-700">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="mb-4 md:mb-0">
+                <h4 className="text-sm font-semibold text-ts-gold mb-2">Connect With Us</h4>
+                <div className="text-center md:text-left">
+                  <div className="flex flex-col md:flex-row items-center text-blue-200 text-xs space-y-1 md:space-y-0 md:space-x-4">
+                    <span>Trusted by 25,000+ Students</span>
+                    <span className="hidden md:inline">•</span>
+                    <span>100% Free Platform</span>
+                    <span className="hidden md:inline">•</span>
+                    <span>Available 24/7</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+      </div>
       </div>
 
       {/* Bottom Bar */}

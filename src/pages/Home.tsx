@@ -1,333 +1,390 @@
-
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Brain, Users, TrendingUp, Clock, Award, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, BookOpen, Brain, Users, Sparkles, Shield, UserCheck, UserCog, ChevronRight } from "lucide-react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
-const Home = () => {
-  const features = [
+// Floating shape component props
+type FloatingShapeProps = {
+  type: 'circle' | 'square';
+  size: number;
+  color: string;
+  top: number;
+  left: number;
+  delay: number;
+  duration?: number;
+  rotate?: number;
+};
+
+const FloatingShape = ({ 
+  type, 
+  size, 
+  color, 
+  top, 
+  left, 
+  delay, 
+  duration = 15, 
+  rotate = 0 
+}: FloatingShapeProps) => {
+  const [isVisible, setIsVisible] = useState(true);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(prev => !prev);
+    }, duration * 1000);
+    
+    return () => clearInterval(interval);
+  }, [duration]);
+  
+  const shapeStyle: React.CSSProperties = {
+    width: `${size}px`,
+    height: `${size}px`,
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `rotate(${rotate}deg) ${isVisible ? 'scale(1)' : 'scale(1.5)'}`,
+    backgroundColor: color,
+    opacity: 0.1,
+    position: 'absolute' as const,
+    borderRadius: type === 'circle' ? '50%' : '10%',
+    transition: 'all 15s ease-in-out',
+    filter: 'blur(20px)'
+  };
+  
+  return <div style={shapeStyle} className="pointer-events-none" />;
+};
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
+// Role Selector Component
+const RoleSelector = () => {
+  const roles = [
     {
-      icon: <Brain className="w-8 h-8 text-ts-gold" />,
-      title: "Live Mock Tests",
-      description: "Practice with real exam pattern questions and get instant results",
+      id: 'constable',
+      title: 'Police Constable',
+      icon: <Shield className="w-8 h-8 text-ts-gold" />,
+      gradient: 'from-blue-500 to-blue-700',
+      description: 'Start your journey as a Police Constable'
     },
     {
-      icon: <BookOpen className="w-8 h-8 text-ts-gold" />,
-      title: "Previous Year Papers",
-      description: "Download original question papers with answer keys",
+      id: 'si',
+      title: 'Sub-Inspector (SI)',
+      icon: <UserCheck className="w-8 h-8 text-ts-gold" />,
+      gradient: 'from-purple-500 to-purple-700',
+      description: 'Aim for the Sub-Inspector position'
     },
     {
-      icon: <Users className="w-8 h-8 text-ts-gold" />,
-      title: "Live Doubt Clearing",
-      description: "Get your doubts cleared instantly via AI chatbot",
+      id: 'ci',
+      title: 'Circle Inspector (CI)',
+      icon: <UserCog className="w-8 h-8 text-ts-gold" />,
+      gradient: 'from-amber-500 to-amber-700',
+      description: 'Advance your career to Circle Inspector'
     },
   ];
-
-  const stats = [
-    { number: "1,00,000+", label: "Students Helped" },
-    { number: "50+", label: "Mock Tests" },
-    { number: "25+", label: "Model Papers" },
-    { number: "24/7", label: "Support Available" }
-  ];
-
-  const latestUpdates = [
-    {
-      title: "TS Constable Notification Released - Apply by June 30",
-      date: "May 20, 2025",
-      type: "Important",
-      link: "#"
-    },
-    {
-      title: "New 2025 Model Papers Added to Download Section",
-      date: "May 18, 2025",
-      type: "New Content",
-      link: "/model-papers"
-    },
-    {
-      title: "Free Live Doubt Session This Sunday at 6 PM",
-      date: "May 15, 2025",
-      type: "Live Event",
-      link: "/ask-doubts"
-    },
-    {
-      title: "SI Exam Pattern Changed - Check Updated Syllabus",
-      date: "May 12, 2025",
-      type: "Update",
-      link: "#"
-    }
-  ];
-
-  const getUpdateTypeColor = (type: string) => {
-    const colors = {
-      "Important": "bg-red-100 text-red-800 border-red-200",
-      "New Content": "bg-green-100 text-green-800 border-green-200",
-      "Live Event": "bg-purple-100 text-purple-800 border-purple-200",
-      "Update": "bg-blue-100 text-blue-800 border-blue-200"
-    };
-    return colors[type] || "bg-gray-100 text-gray-800 border-gray-200";
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50">
-      {/* Hero Section with Wave */}
-      <section className="relative bg-gradient-to-br from-ts-blue via-blue-900 to-indigo-900 text-white py-20 px-4 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-20 h-20 bg-ts-gold rounded-full animate-bounce-gentle"></div>
-          <div className="absolute top-32 right-20 w-16 h-16 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-ts-gold rounded-full animate-bounce-gentle"></div>
-        </div>
-
-        <motion.div 
-          className="max-w-4xl mx-auto text-center relative z-10"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
+    <div className="py-16 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <FloatingShape type="circle" size={300} color="#F9C80E" top={10} left={10} delay={0} duration={20} />
+        <FloatingShape type="square" size={250} color="#4CC9F0" top={70} left={80} delay={2} duration={25} rotate={45} />
+        <FloatingShape type="circle" size={200} color="#7209B7" top={30} left={80} delay={1} duration={30} />
+      </div>
+      
+      <motion.div 
+        className="relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <motion.div className="flex items-center justify-center mb-6" variants={itemVariants}>
-            <Sparkles className="w-6 h-6 text-ts-gold mr-2 animate-pulse" />
-            <span className="bg-gradient-to-r from-ts-gold to-yellow-300 text-ts-blue px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-              Trusted by 1,00,000+ Students
-            </span>
-            <Sparkles className="w-6 h-6 text-ts-gold ml-2 animate-pulse" />
-          </motion.div>
-
-          <motion.h1 
-            className="text-4xl md:text-7xl font-bold mb-6"
-            variants={itemVariants}
-          >
-            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-ts-gold to-yellow-300">TS Police Guru</span>
-          </motion.h1>
-
-          <motion.p 
-            className="text-xl md:text-3xl mb-6 text-blue-100 font-semibold"
-            variants={itemVariants}
-          >
-            Helping <span className="text-ts-gold font-bold">1,00,000+ Students</span> Achieve Their Police Dreams
-          </motion.p>
-
-          <motion.p 
-            className="text-lg mb-8 text-blue-200 max-w-2xl mx-auto"
-            variants={itemVariants}
-          >
-            Complete Preparation Platform for Telangana Police Constable, SI & CI Exams with Live Tests & Expert Guidance
-          </motion.p>
-
-          <motion.div variants={itemVariants}>
-            <Link
-              to="/mock-tests"
-              className="inline-flex items-center bg-gradient-to-r from-ts-gold to-yellow-400 text-ts-blue px-8 py-4 rounded-xl font-bold text-lg hover:from-yellow-400 hover:to-ts-gold transition-all duration-300 shadow-2xl hover:shadow-ts-gold/50 hover:scale-105 transform group"
+          Which role are you <span className="text-ts-gold">preparing</span> for?
+        </motion.h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {roles.map((role, index) => (
+            <motion.div
+              key={role.id}
+              className={`relative overflow-hidden bg-white/5 backdrop-blur-md rounded-3xl p-8 text-white cursor-pointer border border-white/10 hover:border-ts-gold/30 transition-all duration-300`}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                delay: 0.2 + (index * 0.1),
+                duration: 0.5,
+                type: 'spring',
+                stiffness: 100
+              }}
+              whileHover={{ 
+                y: -8,
+                boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.2)'
+              }}
+              whileTap={{ scale: 0.98 }}
             >
-              Start Free Preparation Now
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </motion.div>
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Wave SVG */}
-        <div className="absolute bottom-0 left-0 w-full">
-          <svg viewBox="0 0 1200 120" fill="none" className="w-full h-16">
-            <path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" fill="#F8FAFC"/>
-          </svg>
-        </div>
-      </section>
-
-      {/* Stats Section with Glass Cards */}
-      <section className="py-16 -mt-8 relative z-10">
-        <motion.div 
-          className="max-w-6xl mx-auto px-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/70 backdrop-blur-lg p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20 text-center group hover:scale-105"
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-3xl md:text-4xl font-bold text-ts-blue mb-2 group-hover:text-ts-gold transition-colors">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 font-semibold">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Features Section with Enhanced Cards */}
-      <section className="py-16 px-4">
-        <motion.div 
-          className="max-w-6xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <motion.h2 
-            className="text-3xl md:text-5xl font-bold text-center mb-12 text-ts-blue"
-            variants={itemVariants}
-          >
-            Everything You Need to <span className="text-ts-gold">Succeed</span>
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="group bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/30 hover:scale-105 hover:rotate-1"
-                variants={itemVariants}
-                whileHover={{ y: -10 }}
-              >
-                <motion.div 
-                  className="flex items-center mb-6"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="p-3 bg-gradient-to-br from-ts-gold to-yellow-300 rounded-xl">
-                    {feature.icon}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-ts-gold/10 rounded-full -mr-16 -mt-16"></div>
+              <Link to={`/hubs/${role.id}`} className="block h-full relative z-10">
+                <div className="flex items-start mb-6">
+                  <div className="p-3 bg-gradient-to-br from-ts-gold to-amber-400 rounded-xl mr-4 shadow-lg">
+                    {role.icon}
                   </div>
-                  <h3 className="text-xl font-bold ml-4 text-ts-blue group-hover:text-ts-gold transition-colors">
-                    {feature.title}
-                  </h3>
-                </motion.div>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Latest Updates Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <motion.div 
-          className="max-w-4xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <motion.div className="flex items-center justify-center mb-8" variants={itemVariants}>
-            <TrendingUp className="w-8 h-8 text-ts-gold mr-3" />
-            <h2 className="text-3xl md:text-4xl font-bold text-ts-blue">
-              Latest Updates
-            </h2>
-          </motion.div>
-          
-          <div className="space-y-4">
-            {latestUpdates.map((update, index) => (
-              <motion.div 
-                key={index} 
-                className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border-l-4 border-ts-gold hover:shadow-xl transition-all duration-300 group hover:scale-[1.02]"
-                variants={itemVariants}
-                whileHover={{ x: 5 }}
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center mb-3">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold mr-3 border ${getUpdateTypeColor(update.type)}`}>
-                        {update.type}
-                      </span>
-                      <div className="flex items-center text-gray-500 text-sm">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {update.date}
-                      </div>
-                    </div>
-                    <h3 className="text-lg font-bold text-ts-blue mb-2 group-hover:text-ts-gold transition-colors">
-                      {update.title}
-                    </h3>
-                  </div>
-                  {update.link !== "#" && (
-                    <Link 
-                      to={update.link}
-                      className="mt-3 md:mt-0 text-ts-gold hover:text-yellow-600 font-bold text-sm flex items-center group-hover:scale-110 transition-transform"
-                    >
-                      View Details
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </Link>
-                  )}
+                  <h3 className="text-2xl font-bold mt-1">{role.title}</h3>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-to-br from-ts-blue via-blue-900 to-indigo-900 py-16 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 right-10 w-32 h-32 bg-ts-gold rounded-full animate-pulse"></div>
-          <div className="absolute bottom-10 left-10 w-24 h-24 bg-white rounded-full animate-bounce-gentle"></div>
+                <p className="text-blue-100/80 mb-6 text-sm leading-relaxed">
+                  {role.description}
+                </p>
+                <div className="flex items-center text-sm font-medium text-ts-gold group">
+                  <span>Explore {role.title} Hub</span>
+                  <ChevronRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
+      </motion.div>
+    </div>
+  );
+};
 
+// Hero Section Component
+const HeroSection = () => (
+  <section className="relative bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-900 text-white overflow-hidden">
+    {/* Animated gradient overlay */}
+    <div className="absolute inset-0 opacity-80">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/30 via-slate-900/80 to-slate-900" />
+    </div>
+    {/* Animated background elements */}
+    <div className="absolute inset-0 overflow-hidden">
+        <FloatingShape type="circle" size={400} color="#F9C80E" top={-10} left={-10} delay={0} duration={25} />
+        <FloatingShape type="square" size={300} color="#4CC9F0" top={20} left={20} delay={5} duration={30} rotate={30} />
+        <FloatingShape type="circle" size={250} color="#7209B7" top={10} left={80} delay={10} duration={35} />
+        <FloatingShape type="square" size={200} color="#F72585" top={70} left={70} delay={15} duration={40} rotate={60} />
+        <FloatingShape type="circle" size={350} color="#4361EE" top={-20} left={-20} delay={20} duration={45} />
+    </div>
+    
+    <div className="max-w-7xl mx-auto pt-32 pb-24 px-4 relative z-10">
+      <motion.div 
+        className="text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <motion.div 
-          className="max-w-4xl mx-auto text-center relative z-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
+          className="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <motion.h2 
-            className="text-3xl md:text-5xl font-bold mb-6 text-white"
-            variants={itemVariants}
-          >
-            Ready to Start Your <span className="text-ts-gold">Journey?</span>
-          </motion.h2>
-          <motion.p 
-            className="text-xl mb-8 text-blue-200 max-w-2xl mx-auto"
-            variants={itemVariants}
-          >
-            Join thousands of aspirants who are preparing with TS Police Guru and achieve your dream job
-          </motion.p>
+          <Sparkles className="w-5 h-5 text-ts-gold mr-2" />
+          <span className="text-sm font-medium">Trusted by 1,00,000+ Aspirants</span>
+        </motion.div>
+        
+        <motion.div className="relative inline-block">
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            variants={itemVariants}
+            className="absolute -inset-1 bg-gradient-to-r from-ts-gold/20 via-ts-blue/20 to-ts-blue/30 rounded-lg blur-lg opacity-80 group-hover:opacity-100 transition-all duration-1000 group-hover:duration-300"
+            initial={{ opacity: 0.5 }}
+            animate={{ opacity: 0.8 }}
+            transition={{
+              repeat: Infinity,
+              repeatType: 'reverse',
+              duration: 4,
+              ease: 'easeInOut'
+            }}
+          />
+          <motion.h1 
+            className="relative text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            Your Path to <span className="bg-clip-text text-transparent bg-gradient-to-r from-ts-gold via-amber-300 to-yellow-500">TS Police</span> Success
+          </motion.h1>
+        </motion.div>
+        
+        <motion.p 
+          className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          Comprehensive preparation resources for Telangana Police recruitment exams
+        </motion.p>
+        
+        <motion.div 
+          className="flex flex-col sm:flex-row justify-center gap-4 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative group"
+          >
+            <div className="absolute -inset-1 bg-gradient-to-r from-ts-gold to-amber-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+            <Link
+              to="/study-plans"
+              className="relative bg-gradient-to-r from-ts-gold to-amber-400 text-ts-blue font-bold py-4 px-10 rounded-full transition-all duration-300 inline-flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-amber-500/30"
+            >
+              <span className="relative z-10 flex items-center">
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative group"
           >
             <Link
               to="/mock-tests"
-              className="bg-white text-ts-blue px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform"
+              className="relative bg-transparent hover:bg-white/5 text-white font-bold py-4 px-10 border-2 border-white/20 rounded-full transition-all duration-300 inline-flex items-center justify-center group-hover:border-ts-gold/50 group-hover:text-ts-gold"
             >
-              Take Mock Test
-            </Link>
-            <Link
-              to="/model-papers"
-              className="bg-gradient-to-r from-ts-gold to-yellow-400 text-ts-blue px-8 py-4 rounded-xl font-bold hover:from-yellow-400 hover:to-ts-gold transition-all duration-300 shadow-xl hover:shadow-ts-gold/50 hover:scale-105 transform"
-            >
-              Download Papers
+              <span className="relative z-10 flex items-center">
+                Try Free Test
+                <ChevronRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+              </span>
             </Link>
           </motion.div>
         </motion.div>
-      </section>
+      </motion.div>
+      
+      {/* Role Selector Component */}
+      <RoleSelector />
+    </div>
+  </section>
+);
+
+// Features Section Component
+const FeaturesSection = () => (
+  <section className="relative py-20 bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-br from-ts-blue/5 via-white to-ts-gold/5">
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0.8))] opacity-10"></div>
+    </div>
+    
+    <div className="relative max-w-7xl mx-auto px-4">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={containerVariants}
+        className="text-center"
+      >
+        <div className="relative inline-block mb-12">
+          <motion.div 
+            className="absolute -inset-1 bg-gradient-to-r from-ts-gold/20 via-ts-blue/20 to-ts-blue/30 rounded-lg blur-lg opacity-80"
+            initial={{ opacity: 0.5 }}
+            animate={{ opacity: 0.8 }}
+            transition={{
+              repeat: Infinity,
+              repeatType: 'reverse',
+              duration: 4,
+              ease: 'easeInOut'
+            }}
+          />
+          <motion.h2 
+            className="relative text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400"
+            variants={itemVariants}
+          >
+            Why Choose <span className="bg-clip-text text-transparent bg-gradient-to-r from-ts-gold via-amber-300 to-yellow-500">TS Police Guru</span>?
+          </motion.h2>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: <BookOpen className="w-12 h-12 text-ts-gold mx-auto mb-6 p-2 bg-ts-blue/10 rounded-full" />,
+              title: 'Comprehensive Study Material',
+              description: 'Access to a vast collection of study materials, practice tests, and previous year papers.'
+            },
+            {
+              icon: <Brain className="w-12 h-12 text-ts-gold mx-auto mb-6 p-2 bg-ts-blue/10 rounded-full" />,
+              title: 'AI-Powered Learning',
+              description: 'Get personalized recommendations and doubt clarification through our AI chatbot.'
+            },
+            {
+              icon: <Users className="w-12 h-12 text-ts-gold mx-auto mb-6 p-2 bg-ts-blue/10 rounded-full" />,
+              title: 'Bilingual Support',
+              description: 'Study in both Telugu and English for better understanding and preparation.'
+            }
+          ].map((feature, index) => (
+            <motion.div 
+              key={index}
+              className="relative bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 hover:border-ts-gold/50"
+              variants={itemVariants}
+            >
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-ts-gold/10 to-ts-blue/10 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-4 mt-2 text-transparent bg-clip-text bg-gradient-to-r from-ts-blue to-gray-800">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {feature.description}
+              </p>
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-ts-gold/30 transition-all duration-300 pointer-events-none"></div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// CTA Section Component
+const CTASection = () => (
+  <section className="py-16 bg-gradient-to-r from-ts-blue to-indigo-900 text-white">
+    <div className="max-w-4xl mx-auto px-4 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h2 className="text-3xl font-bold mb-6">Ready to Start Your Journey?</h2>
+        <p className="text-xl mb-8 text-blue-100">Join thousands of aspirants preparing for TS Police exams with our comprehensive platform.</p>
+        <Link
+          to="/signup"
+          className="inline-block bg-ts-gold hover:bg-yellow-500 text-ts-blue font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+        >
+          Get Started for Free
+          <ArrowRight className="inline-block ml-2 h-5 w-5" />
+        </Link>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Main Home Component
+const Home = () => {
+  return (
+    <div className="min-h-screen bg-light-blue">
+      <HeroSection />
+      <FeaturesSection />
+      <CTASection />
     </div>
   );
 };

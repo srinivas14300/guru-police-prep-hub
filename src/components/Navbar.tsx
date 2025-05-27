@@ -10,6 +10,11 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
+    { 
+      name: "Study Plans", 
+      path: "/study-plans",
+      highlight: true // Flag to highlight this item
+    },
     { name: "Mock Tests", path: "/mock-tests" },
     { name: "Model Papers", path: "/model-papers" },
     { name: "Ask Doubts", path: "/ask-doubts" },
@@ -29,39 +34,69 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             <motion.div 
-              className="bg-ts-gold text-ts-blue p-2 rounded-lg"
-              whileHover={{ scale: 1.05, rotate: 5 }}
+              className="flex items-center"
+              whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <Shield className="w-6 h-6 font-bold" />
+              <img 
+                src="/logo.png" 
+                alt="TS Police Guru" 
+                className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  console.error('Failed to load logo:', e);
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = '/placeholder.svg';
+                }}
+                onLoad={() => console.log('Logo loaded successfully')}
+              />
+              <div className="hidden md:block text-white ml-2">
+                <span className="font-bold text-lg">TS Police Guru</span>
+              </div>
             </motion.div>
-            <div className="text-white">
-              <span className="font-bold text-xl">TS Police</span>
-              <span className="text-ts-gold font-bold text-xl ml-1">Guru</span>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-2">
             {navItems.map((item) => (
-              <Link
+              <motion.div 
                 key={item.name}
-                to={item.path}
-                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  isActive(item.path)
-                    ? "bg-ts-gold text-ts-blue shadow-lg"
-                    : "text-white hover:bg-white/10 hover:text-ts-gold"
-                }`}
+                className="relative"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {item.name}
-                {isActive(item.path) && (
-                  <motion.div
-                    className="absolute inset-0 bg-ts-gold rounded-lg -z-10"
-                    layoutId="activeTab"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </Link>
+                <Link
+                  to={item.path}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                    isActive(item.path)
+                      ? "bg-ts-gold text-ts-blue shadow-lg"
+                      : "text-white hover:bg-white/10 hover:text-ts-gold"
+                  } ${item.highlight ? 'font-bold' : ''}`}
+                >
+                  {item.name}
+                  {item.highlight && !isActive(item.path) && (
+                    <motion.span
+                      className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-ts-gold"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.7, 1, 0.7],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: 'reverse',
+                      }}
+                    />
+                  )}
+                  {isActive(item.path) && (
+                    <motion.div
+                      className="absolute inset-0 bg-ts-gold rounded-lg -z-10"
+                      layoutId="activeTab"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
           </div>
 
@@ -95,6 +130,7 @@ const Navbar = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  className="relative"
                 >
                   <Link
                     to={item.path}
@@ -103,9 +139,12 @@ const Navbar = () => {
                       isActive(item.path)
                         ? "bg-ts-gold text-ts-blue shadow-lg transform scale-105"
                         : "text-white hover:bg-white/10 hover:text-ts-gold hover:translate-x-2"
-                    }`}
+                    } ${item.highlight ? 'font-bold' : ''}`}
                   >
                     {item.name}
+                    {item.highlight && !isActive(item.path) && (
+                      <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-ts-gold animate-pulse"></span>
+                    )}
                   </Link>
                 </motion.div>
               ))}
